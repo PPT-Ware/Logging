@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pptware.loggingsolution.logging.TimeTrace;
 import pptware.loggingsolution.member.dto.MemberDto;
 import pptware.loggingsolution.member.service.MemberService;
 
@@ -19,6 +20,8 @@ public class MemberController {
     회원가입 로직
     12번째줄에서 HTTP Method를 쓰지않고 @PostMapping을 사용함
      */
+
+    @TimeTrace
     @PostMapping
     public ResponseEntity postMember(@RequestBody MemberDto.Post post) {
         MemberDto.Response response = memberService.createMember(post);
@@ -29,6 +32,7 @@ public class MemberController {
     회원정보 수정 로직
     12번째줄에서 HTTP Method를 쓰지않고 @PatchMapping을 사용함
     */
+    @TimeTrace
     @PatchMapping("/{memberId}")
     public ResponseEntity patchMember(@PathVariable("memberId") Long memberId,
                                       @RequestBody MemberDto.Patch patch) {
@@ -40,6 +44,7 @@ public class MemberController {
     회원탈퇴 로직
     12번째줄에서 HTTP Method를 쓰지않고 @DeleteMapping을 사용함
     */
+    @TimeTrace
     @DeleteMapping("/{memberId}")
     public ResponseEntity deleteMember(@PathVariable("memberId") Long memberId) {
         memberService.deleteMember(memberId);

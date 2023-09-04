@@ -3,6 +3,7 @@ package pptware.loggingsolution.member.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pptware.loggingsolution.logging.TimeTrace;
 import pptware.loggingsolution.member.dto.MemberDto;
 import pptware.loggingsolution.member.entity.Member;
 import pptware.loggingsolution.member.repository.MemberRepository;
@@ -27,6 +28,7 @@ public class MemberServiceImpl implements MemberService {
     잘 모르겠다면 @setter를 사용하셔도 무방
      */
 
+    @TimeTrace
     public MemberDto.Response createMember(MemberDto.Post post) {
 
         Member member = Member.builder()
@@ -49,6 +51,7 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+    @TimeTrace
     public MemberDto.Response updateMember(Long memberId, MemberDto.Patch patch) {
 
         Optional<Member> member = memberRepository.findById(memberId);
@@ -75,6 +78,7 @@ public class MemberServiceImpl implements MemberService {
         return response;
     }
 
+    @TimeTrace
     public void deleteMember(Long memberId) {
         memberRepository.deleteById(memberId);
     }
