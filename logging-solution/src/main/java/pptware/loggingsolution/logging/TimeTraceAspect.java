@@ -17,22 +17,10 @@ public class TimeTraceAspect {
         this.dataHolder = dataHolder;
     }
 
-    /**
-     * 커스텀한 {@link DataHolder}를 이용해 @{@link TimeTrace}가 붙은 메서드마다의 걸리는 시간을 측정하는 Advice.
-     *
-     * <p>
-     *
-     * @param joinPoint
-     * @param timeTrace TimeTrace의 정보 (millis 값을 받아오기 위해 파라미터로 추가)
-     * @return 요청한 클래스에 전달할 원본 객체의 응답 값
-     * @throws Throwable
-     * @millis log.WARN 을 표시할 기준 ms
-     * @limitMillis log.ERROR를 표시할 기준 ms
-     */
-    @Around("@annotation(timeTrace)")
+    @Around("@annotation(timeTrace)") // TimeTrace 어노테이션이 적용된 곳을 포인트컷으로 사용
     public Object doTimeTrace(ProceedingJoinPoint joinPoint, TimeTrace timeTrace) throws Throwable {
 
-        String name = joinPoint.getSignature().toShortString().split("\\(")[0] + "()";
+        String name = joinPoint.getSignature().toShortString().split("\\(")[0] + "()"; // 현재 실행중인 메소드의 시그니처 정보를 가져오는 메소드
         String uri = dataHolder.getUri();
         int millis = timeTrace.millis();
         final int limitMillis = 300;
@@ -54,14 +42,6 @@ public class TimeTraceAspect {
         return result;
     }
 
-    /**
-     * Loggin을 실행하는 메서드 (중복으로 인한 메서드 추출)
-     *
-     * @param arrow             로그에 표시될 ->, <- 선택
-     * @param uri              {@link DataHolder} 에 설정된 uuid
-     * @param name              Target 메서드의 클래스명과 메서드명
-     * @param lastStopWatchTime 마지막으로 측정된 StopWatch의 ms
-     */
     private void doLogTime(String arrow, String uri, String name, long lastStopWatchTime,
                            int millis, int limitMillis) {
         if (lastStopWatchTime <= millis) {

@@ -3,10 +3,7 @@ package pptware.loggingsolution.member.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-
 import java.time.LocalDateTime;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 public class MemberDto {
 
@@ -25,8 +22,6 @@ public class MemberDto {
     @Getter
     @AllArgsConstructor
     public static class Patch {
-
-//        private Long memberId;
 
         private String password;
 

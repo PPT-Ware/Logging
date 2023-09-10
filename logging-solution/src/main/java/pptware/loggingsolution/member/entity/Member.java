@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Member {
 
-    @Id // 기본 키 지정
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본 키 생성을 DB에 위임 https://rutgo-letsgo.tistory.com/306
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
     @Column(nullable = false, unique = true, updatable = false)

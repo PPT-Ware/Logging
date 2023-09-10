@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @RequiredArgsConstructor
 public class DataInterceptor implements HandlerInterceptor {
-
     private final DataHolder dataHolder;
 
     @Override
